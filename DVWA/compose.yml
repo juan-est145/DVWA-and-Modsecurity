@@ -37,3 +37,10 @@ services:
     networks:
       - dvwa
     restart: unless-stopped
+
+  waf:
+    image: owasp/modsecurity-crs:nginx
+    environment:
+      - PORT=8080
+    ports:
+      - 127.0.0.1:3000:8080
