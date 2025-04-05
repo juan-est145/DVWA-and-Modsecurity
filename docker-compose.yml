@@ -1,26 +1,13 @@
-volumes:
-  dvwa:
-
-
-networks:
-  dvwa:
-
-
 services:
   dvwa:
-    build: .
-    image: ghcr.io/digininja/dvwa:latest
-    # Change `always` to `build` to build from local source
+    image: ghcr.io/digininja/dvwa:257b70f
     pull_policy: always
     environment:
       - DB_SERVER=db
     depends_on:
       - db
-    # Uncomment the next 2 lines to serve local source
-    # volumes:
-    #   - ./:/var/www/html
     networks:
-      - dvwa
+      - lan
     ports:
       - 127.0.0.1:4280:80
     restart: unless-stopped
@@ -35,7 +22,7 @@ services:
     volumes:
       - dvwa:/var/lib/mysql
     networks:
-      - dvwa
+      - lan
     restart: unless-stopped
 
   waf:
@@ -44,3 +31,11 @@ services:
       - PORT=8080
     ports:
       - 127.0.0.1:3000:8080
+
+volumes:
+  dvwa:
+
+
+networks:
+  lan:
+    driver: bridge
