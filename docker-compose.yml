@@ -8,8 +8,8 @@ services:
       - db
     networks:
       - lan
-    ports:
-      - 127.0.0.1:4280:80
+    # ports:
+    #   - 127.0.0.1:4280:80
     restart: unless-stopped
 
   db:
@@ -29,8 +29,11 @@ services:
     image: owasp/modsecurity-crs:nginx
     environment:
       - PORT=8080
+      - BACKEND=http://dvwa:80
     ports:
       - 127.0.0.1:3000:8080
+    networks:
+      - lan
 
 volumes:
   dvwa:
