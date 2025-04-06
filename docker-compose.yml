@@ -98,6 +98,7 @@ services:
       - ./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
       - wazuh-dashboard-config:/usr/share/wazuh-dashboard/data/wazuh/config
       - wazuh-dashboard-custom:/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom
+      - ./local_decoder.xml:/var/ossec/etc/decoders/local_decoder.xml
     depends_on:
       - wazuh.indexer
     links:
